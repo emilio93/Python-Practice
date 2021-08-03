@@ -45,8 +45,11 @@ def redefine_search_key(key):
 def search(args):
   movies = get_movies()
   filter_flag = False
-  for search_key in vars(args):
-    search_value = vars(args)[search_key]
+  args_vars = args
+  try: args_vars = vars(args)
+  except: pass
+  for search_key in args_vars:
+    search_value = args_vars[search_key]
     search_key = redefine_search_key(search_key)
 
     if not search_value: continue
