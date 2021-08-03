@@ -1,5 +1,7 @@
+import argparse
+
 def interest_loan_calculator(principal, rate, time_periods):
-  """interest = rate * principal * time_periods
+  """interest = principal * rate * time_periods
 
   Args:
       principal (float): The principal of the loan.
@@ -90,4 +92,50 @@ def test():
   if not hasError:
     print("All functions work.")
 
-test()
+def cli():
+  parser = argparse.ArgumentParser(description='Loan Payment Calculator')
+  parser.add_argument('-p',
+                      '--principal',
+                      type=float,
+                      help='Principal of the loan',
+                      required=True
+                      )
+  parser.add_argument('-r',
+                      '--rate',
+                      type=float,
+                      help='Rate of the loan',
+                      required=True
+                      )
+  parser.add_argument('-t',
+                      '--time-periods',
+                      type=int,
+                      help='Time periods of the loan',
+                      required=True
+                      )
+  parser.add_argument('-v',
+                      '--verbose',
+                      action="store_true",
+                      help="Print the formula",
+                      required=False
+                      )
+  args = parser.parse_args()
+  return args
+
+def calculate_loan_interest(args):
+  return interest_loan_calculator(
+    principal=args.principal,
+    rate=args.rate,
+    time_periods=args.time_periods
+  )
+
+def __main__():
+  args = cli()
+  interest = calculate_loan_interest(args)
+  print(f"The interest is {interest}")
+  if (args.verbose):
+    print('')
+    print(f"Interest = Principal * Rate * Time Periods")
+    print(f"Interest = {args.principal} * {args.rate} * {args.time_periods}")
+    print(f"Iterest = {interest}")
+
+__main__()
