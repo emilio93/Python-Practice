@@ -69,7 +69,11 @@ def test():
     arg_rate,
     arg_time_periods
   )
-  rate = rate_loan_calculator(arg_interest, arg_principal, 2)
+  rate = rate_loan_calculator(
+    arg_interest,
+    arg_principal,
+    arg_time_periods
+  )
   time_periods = time_periods_loan_calculator(
     arg_interest,
     arg_principal,
