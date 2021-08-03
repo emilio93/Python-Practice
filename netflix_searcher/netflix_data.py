@@ -38,6 +38,34 @@ def search_by_key(movies, key, value, strict=True):
 def get_movies():
   return read_csv(CSV_FILEPATH)
 
+def redefine_search_key(key):
+  key = "release_year" if key == "year" else key
+  return key
+
+def search(args):
+  movies = get_movies()
+  filter_flag = False
+  for search_key in vars(args):
+    search_value = vars(args)[search_key]
+    search_key = redefine_search_key(search_key)
+
+    if not search_value: continue
+    if search_key == "verbose": continue
+
+    filter_flag = True
+
+    movies = search_by_key(
+      movies=movies,
+      key=search_key,
+      value=search_value,
+      strict=False
+    )
+
+  if not filter_flag:
+    raise Exception("ERROR: No search criteria specified")
+
+  return movies
+
 def print_movie(
   movie,
   cut_off=0,

@@ -42,34 +42,6 @@ def cli():
   args = parser.parse_args()
   return [args, parser]
 
-def redefine_search_key(key):
-  key = "release_year" if key == "year" else key
-  return key
-
-def search(args):
-  movies = netflix_data.get_movies()
-  filter_flag = False
-  for search_key in vars(args):
-    search_value = vars(args)[search_key]
-    search_key = redefine_search_key(search_key)
-
-    if not search_value: continue
-    if search_key == "verbose": continue
-
-    filter_flag = True
-
-    movies = netflix_data.search_by_key(
-      movies=movies,
-      key=search_key,
-      value=search_value,
-      strict=False
-    )
-
-  if not filter_flag:
-    raise Exception("ERROR: No search criteria specified")
-
-  return movies
-
 def get_separator(
   char='*',
   length=80,
@@ -85,7 +57,7 @@ def __main__():
   if args.verbose: cut_off = 0
 
   try:
-    found_movies = search(args)
+    found_movies = netflix_data.search(args)
     for movie in found_movies:
       netflix_data.print_movie(
         movie=movie,
