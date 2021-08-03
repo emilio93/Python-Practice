@@ -52,7 +52,7 @@ def get_separator(
 
 def __main__():
   [args, parser] = cli()
-
+  print(args)
   cut_off = 61
   if args.verbose: cut_off = 0
 
