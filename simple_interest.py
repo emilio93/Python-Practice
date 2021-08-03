@@ -136,6 +136,6 @@ def __main__():
     print('')
     print(f"Interest = Principal * Rate * Time Periods")
     print(f"Interest = {args.principal} * {args.rate} * {args.time_periods}")
-    print(f"Iterest = {interest}")
+    print(f"Interest = {interest}")
 
 __main__()
