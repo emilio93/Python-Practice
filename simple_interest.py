@@ -132,10 +132,13 @@ def __main__():
   args = cli()
   interest = calculate_loan_interest(args)
   print(f"The interest is {interest}")
+  print(f"Total owed is {interest + args.principal}")
   if (args.verbose):
     print('')
     print(f"Interest = Principal * Rate * Time Periods")
     print(f"Interest = {args.principal} * {args.rate} * {args.time_periods}")
     print(f"Interest = {interest}")
-
+    print('')
+    print(f"Total owed = {interest} + {args.principal}")
+    print(f"Total owed = {interest + args.principal}")
 __main__()
